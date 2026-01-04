@@ -5,8 +5,11 @@ from typing import Dict
 from .settings import settings
 from .schemas import FurnaceStatus, SeriesResponse, EventsResponse, CaptureResponse
 from .simulator import Simulator
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="FlameVision API", version="0.1.0")
+
+Instrumentator().instrument(app).expose(app)
 
 # Em produto: restrinja allow_origins ao host do frontend
 app.add_middleware(
